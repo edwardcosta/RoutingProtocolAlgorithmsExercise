@@ -5,4 +5,4 @@ Alunos:
 Eduardo Calandrini Rocha da Costa - 13/0059595
 Douglas Shiro
 
-Protocolo Link State e por consequência Dijkstra
+Protocolo Link State e por consequência algortimo de Dijkstra
