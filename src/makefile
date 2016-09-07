@@ -1,11 +1,11 @@
 IDIR =../include
 CC=gcc
-CFLAGS=-I$(IDIR)
+CFLAGS=-I -ansi -Wall$(IDIR)
 
 ODIR=../obj
 LDIR =../lib
 
-LIBS=-lm
+LIBS=-lm -pthread
 
 _DEPS = hellomake.h
 DEPS = $(patsubst %,$(IDIR)/%,$(_DEPS))
