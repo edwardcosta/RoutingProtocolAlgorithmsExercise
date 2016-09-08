@@ -7,10 +7,10 @@ LDIR =../lib
 
 LIBS=-lm -pthread
 
-_DEPS =
+_DEPS = file.h
 DEPS = $(patsubst %,$(IDIR)/%,$(_DEPS))
 
-_OBJ = main.o
+_OBJ = main.o file.o
 OBJ = $(patsubst %,$(ODIR)/%,$(_OBJ))
 
 
