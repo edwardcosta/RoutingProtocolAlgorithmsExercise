@@ -1,23 +1,23 @@
 IDIR =../include
 CC=gcc
-CFLAGS=-I -ansi -Wall$(IDIR)
+CFLAGS=-I$(IDIR)
 
 ODIR=../obj
 LDIR =../lib
 
 LIBS=-lm -pthread
 
-_DEPS = hellomake.h
+_DEPS =
 DEPS = $(patsubst %,$(IDIR)/%,$(_DEPS))
 
-_OBJ = hellomake.o hellofunc.o
+_OBJ = main.o
 OBJ = $(patsubst %,$(ODIR)/%,$(_OBJ))
 
 
 $(ODIR)/%.o: %.c $(DEPS)
 	$(CC) -c -o $@ $< $(CFLAGS)
 
-hellomake: $(OBJ)
+main: $(OBJ)
 	gcc -o $@ $^ $(CFLAGS) $(LIBS)
 
 .PHONY: clean
