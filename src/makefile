@@ -17,10 +17,10 @@ OBJ = $(patsubst %,$(ODIR)/%,$(_OBJ))
 $(ODIR)/%.o: %.c $(DEPS)
 	$(CC) -c -o $@ $< $(CFLAGS)
 
-main: $(OBJ)
+	main: $(OBJ)
 	gcc -o $@ $^ $(CFLAGS) $(LIBS)
 
-.PHONY: clean
+	.PHONY: clean
 
-clean:
+	clean:
 	rm -f $(ODIR)/*.o *~ core $(INCDIR)/*~

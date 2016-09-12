@@ -78,7 +78,7 @@ Grafo* loadFile(char* file_name){
         printf("verifique o nome inserido e tente novamente.\n");
     }
     // imprimeTabela(link_state);
-return link_state;
+    return link_state;
 }
 
 Grafo* constroiTabela(int no, Lista_vizinho* lista_no){
@@ -90,7 +90,7 @@ Grafo* constroiTabela(int no, Lista_vizinho* lista_no){
     constroi->num = no;
     constroi->vizinho = lista_no;
 
-return constroi;
+    return constroi;
 }
 
 void imprimeTabela(Grafo* link_state){
