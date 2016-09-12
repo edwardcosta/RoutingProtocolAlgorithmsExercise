@@ -14,7 +14,7 @@ Compilação:
 Execução:
 	Rodar o executável gerado na compilação com o nome da	 topologia desejada.
 
-	./link_state tologia_x
+	./main tologia_x
 
 Saídas do programa:
 	- Lista de destino e custos;

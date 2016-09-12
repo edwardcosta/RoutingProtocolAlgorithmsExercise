@@ -23,18 +23,9 @@
 #include <string.h>
 #include "file.h"
 
-typedef struct roteador{
-    int num;
-    FILE *arq;
-    struct roteador* vizinho;
-}Roteador;
-
-typedef struct lista{
-    Roteador* roteador;
-    struct lista* next;
-}Lista;
-
 int main(int argc, char **argv) {
+
+    Grafo* link_state;
 
     if(argc != 2){
         printf("\nERROR: numero de argumentos de entrada inválido\n");
@@ -42,7 +33,10 @@ int main(int argc, char **argv) {
     }else{
         char nome_topologia[20];
         strcpy(nome_topologia, argv[1]);
-        loadFile(nome_topologia);
+        link_state = loadFile(nome_topologia);
+        // imprimeTabela(link_state);
+
+        
     }
     return 0;
 }
