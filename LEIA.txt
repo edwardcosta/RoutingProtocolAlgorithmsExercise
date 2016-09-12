@@ -1,0 +1,22 @@
+Trabalho de Teleinformática e Redes 2 do Professor Bordim.
+
+Alunos:
+Eduardo Calandrini Rocha da Costa 	- 13/0059595
+Douglas Shiro Yokoyama				- 13/0024902
+
+Protocolo Link State e por consequência algortimo de Dijkstra.
+
+Liguagem de programção utilizada: C
+
+Compilação:
+	Ir para diretório src e executar comando make.
+
+Execução:
+	Rodar o executável gerado na compilação com o nome da	 topologia desejada.
+
+	./link_state tologia_x
+
+Saídas do programa:
+	- Lista de destino e custos;
+	- Convergência;
+	- Validação.
