@@ -1,10 +1,8 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
+#ifndef FILE_H
+#define FILE_H
 
-void loadFIle(char* filename);
-/**
- * #ifndef FILE_H
- * #define FILE_H
- * #endif
- */
+
+void loadFile(char* filename);
+
+
+#endif

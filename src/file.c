@@ -1,4 +1,6 @@
-#include "file.h"
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 
 void loadFile(char* file_name){
     strcat(file_name, ".txt");
