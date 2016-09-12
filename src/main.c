@@ -35,12 +35,11 @@ int main(int argc, char **argv) {
 
     if(argc != 2){
         printf("\nERROR: numero de argumentos de entrada inválido\n");
-        printf("formato entrada: ./main nome_topologia\n\n");
+        printf("formato entrada: ./main nome_topologia\n");
     }else{
         char nome_topologia[20];
         strcpy(nome_topologia, argv[1]);
-        loadFIle(nome_topologia);
+        loadFile(nome_topologia);
     }
-
     return 0;
 }
