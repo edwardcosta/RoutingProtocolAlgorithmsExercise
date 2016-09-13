@@ -9,17 +9,20 @@ typedef struct no_aux{
 
 typedef struct no{
     int num;    // numero do no
-    FILE* grafo;
-    FILE* tabela;
+    char grafo[20];
+    char tabela[20];
     Lista_vizinho* vizinho;
     struct no* proximo;
 }Grafo;
+
 
 Grafo* loadFile(char* filename);
 
 Grafo* constroiTabela(int no, Lista_vizinho* lista_no_aux);
 
+int escreveTabelaTopologia(Grafo* no);
 void imprimeTabela(Grafo* link_state);
 
+void imprimeTabelaGrafo();
 
 #endif

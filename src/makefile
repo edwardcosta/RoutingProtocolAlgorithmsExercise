@@ -5,7 +5,7 @@ CFLAGS=-I$(IDIR)
 ODIR=../obj
 LDIR =../lib
 
-LIBS=-lm -pthread
+LIBS=-lm -pthread -g
 
 _DEPS = file.h
 DEPS = $(patsubst %,$(IDIR)/%,$(_DEPS))
@@ -17,10 +17,10 @@ OBJ = $(patsubst %,$(ODIR)/%,$(_OBJ))
 $(ODIR)/%.o: %.c $(DEPS)
 	$(CC) -c -o $@ $< $(CFLAGS)
 
-	main: $(OBJ)
+main: $(OBJ)
 	gcc -o $@ $^ $(CFLAGS) $(LIBS)
 
-	.PHONY: clean
+.PHONY: clean
 
-	clean:
+clean:
 	rm -f $(ODIR)/*.o *~ core $(INCDIR)/*~

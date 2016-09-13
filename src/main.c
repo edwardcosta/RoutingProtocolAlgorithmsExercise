@@ -14,7 +14,9 @@
 *      no formato:
 *          nodo; vizinho1[custo]; vizinho2[custo]; · · · , vizinhoN[custo]
 ** Saida:
-*
+*      Lista de destino e custos;
+*      Convergência;
+*      Validação.
 *
 */
 
@@ -26,6 +28,9 @@
 int main(int argc, char **argv) {
 
     Grafo* link_state;
+    Grafo* link_state_aux;
+
+    int troca = 1;
 
     if(argc != 2){
         printf("\nERROR: numero de argumentos de entrada inválido\n");
@@ -34,9 +39,15 @@ int main(int argc, char **argv) {
         char nome_topologia[20];
         strcpy(nome_topologia, argv[1]);
         link_state = loadFile(nome_topologia);
-        // imprimeTabela(link_state);
-
-
+        //imprimeTabela(link_state);
+        while(troca){
+            link_state_aux = link_state;
+            while(link_state_aux != NULL){
+                troca = escreveTabelaTopologia(link_state);
+                link_state_aux = link_state_aux->proximo;
+            }
+        }
+        imprimeTabelaGrafo();
     }
     return 0;
 }
