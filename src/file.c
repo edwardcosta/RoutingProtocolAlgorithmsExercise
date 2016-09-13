@@ -93,6 +93,21 @@ Grafo* constroiTabela(int no, Lista_vizinho* lista_no){
     return constroi;
 }
 
+void escreveTabelaTopografia(Grafo* src, Grafo* dst){
+    Grafo* src_aux = src;
+    Grafo* dst_aux = dst;
+    char filename[10];
+
+    sprintf(filename,"%d.txt",dst_aux->num);
+
+    dst_aux->grafo = fopen(filename,"r");
+
+    if(src_aux->grafo == NULL){
+        dst_aux->grafo = fopen(filename,"w");
+        fprintf(dst->grafo, "\n", );
+    }
+}
+
 void imprimeTabela(Grafo* link_state){
     Grafo* aux = link_state;
     for(;aux != NULL; aux = aux->proximo){
