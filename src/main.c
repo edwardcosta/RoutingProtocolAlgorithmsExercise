@@ -17,7 +17,6 @@
 *      Lista de destino e custos;
 *      Convergência;
 *      Validação.
-*
 */
 
 #include <stdio.h>
@@ -38,8 +37,15 @@ int main(int argc, char **argv) {
     }else{
         char nome_topologia[20];
         strcpy(nome_topologia, argv[1]);
+        /**
+         * Recebe o nome da topologia por linha de comando e a partir do arquivo
+         * eh gerado um grafo com os dados lidos, nos, vizinhos e custos
+         */
         link_state = loadFile(nome_topologia);
         //imprimeTabela(link_state);
+        /**
+         * Faz troca de dados enquanto ha troca de dados dos nos entre os nos
+         */
         while(troca){
             link_state_aux = link_state;
             while(link_state_aux != NULL){

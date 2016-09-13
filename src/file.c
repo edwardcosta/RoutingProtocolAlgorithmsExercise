@@ -3,7 +3,11 @@
 #include <string.h>
 #include "file.h"
 
-
+/**
+ * [loadFile description]
+ * @param  file_name [Arquivo com os nós da topologia]
+ * @return           [Grafo com nós e vizinhos e custos]
+ */
 Grafo* loadFile(char* file_name){
     strcat(file_name, ".txt");
 
@@ -24,11 +28,17 @@ Grafo* loadFile(char* file_name){
     arq = fopen(file_name,"r");
 
     if(arq != NULL){
+        /**
+         * Percorre arquivo até o final
+         */
         while(sair != 1){ // le no
             if((c_aux = fgetc(arq)) == EOF){
                 sair = 1;
                 break;
             }
+            /**
+             * Le o valor do no
+             */
             c[0] = c_aux;
             c[1] = '\0';
             strcpy(no, c);
@@ -37,10 +47,15 @@ Grafo* loadFile(char* file_name){
                 c[1] = '\0';
                 strcat(no, c);
             }
-            // printf("no:%s\n", no);
             lista_no = NULL;
             lista_no_aux = NULL;
+            /**
+             * le vizinho e custo enquanto nao passar para o outro no
+             */
             while((c_aux = fgetc(arq))!= '\n'){
+                /**
+                 * le vizinho
+                 */
                 c[0] = c_aux;
                 c[1] = '\0';
                 strcpy(vizinho, c);
@@ -50,6 +65,9 @@ Grafo* loadFile(char* file_name){
                     strcat(vizinho, c);
                 }
                 c_aux = fgetc(arq);
+                /**
+                 * le custo
+                 */
                 c[0] = c_aux;
                 c[1] = '\0';
                 strcpy(custo, c);
@@ -60,6 +78,9 @@ Grafo* loadFile(char* file_name){
                 }
                 fgetc(arq);
 
+                /**
+                 * Insere os vizinhos e custos lidos do no e os insere em uma lista
+                 */
                 lista_no_aux = calloc(1,sizeof(Lista_vizinho));
                 lista_no_aux->vizinho = atoi(vizinho);
                 lista_no_aux->custo = atoi(custo);
@@ -67,6 +88,10 @@ Grafo* loadFile(char* file_name){
                 lista_no = lista_no_aux;
                 // printf("\tvizinho:%d custo:%d\n", lista_no_aux->vizinho, lista_no_aux->custo);
             }
+            /**
+             * Com a lista dos vizinhos do no pronta eh gerado um no no Grafo
+             * com o no lido e seus vizinhos
+             */
             link_state_aux = constroiTabela(atoi(no), lista_no);
             link_state_aux->proximo = link_state;
             link_state = link_state_aux;
@@ -80,6 +105,14 @@ Grafo* loadFile(char* file_name){
     return link_state;
 }
 
+/**
+ * [constroiTabela Para cada no é criado um espaço dentro do grafo que
+ * ira receber a topologia total]
+ * @param  no       [valor do no]
+ * @param  lista_no [Lista dos vizinhos associados ao no]
+ * @return Grafo    [retorna os dados na forma de grafo para ser adicionada
+ *                   no grafo principal]
+ */
 Grafo* constroiTabela(int no, Lista_vizinho* lista_no){
 
     Grafo* constroi = NULL;
@@ -89,11 +122,23 @@ Grafo* constroiTabela(int no, Lista_vizinho* lista_no){
     constroi->num = no;
     constroi->vizinho = lista_no;
 
+    /**
+     * Cada no possui uma tabela com a informação do grafo a ser preenchida
+     */
     sprintf(constroi->grafo, "grafo_%d.txt", no);
 
     return constroi;
 }
 
+/**
+ * [escreveTabelaTopologia Função que faz a distribuição dos dados dos nos
+ * e seus vizinhos para todos os outros nos, para que todos nos fiquem
+ * com a toda informação da topologia]
+ * @param  no [No da topologia]
+ * @return    [int como sendo uma variavel de controle, caso seja retornado
+ *              1 o programa continua distribuindo os dados dos nos, caso
+ *              contrario todos os nos já possuem a topologia total]
+ */
 int escreveTabelaTopologia(Grafo* no){
     Grafo* src_aux = no;
     Lista_vizinho* aux_no = no->vizinho;
@@ -114,7 +159,7 @@ int escreveTabelaTopologia(Grafo* no){
 
     grafo_no = fopen(src_aux->grafo,"r");
 
-    if(grafo_no != NULL){
+    if(grafo_no == NULL){
         printf("ola entrei! %d ", src_aux->num);
         grafo_no = fopen(src_aux->grafo,"w");
         fprintf(grafo_no, "%d;", src_aux->num);
@@ -166,8 +211,16 @@ int escreveTabelaTopologia(Grafo* no){
     return troca;
 }
 
+/**
+ * [imprimeTabela Função para impressão do grafo gravado gerado pela leitura do
+ * arquivo da topologia]
+ * @param link_state [grafo da topologia a ser impressa]
+ */
 void imprimeTabela(Grafo* link_state){
     Grafo* aux = link_state;
+    /**
+     * percorre grafo
+     */
     for(;aux != NULL; aux = aux->proximo){
         printf("no: %d\n", aux->num);
         Lista_vizinho* lista = aux->vizinho;
