@@ -15,6 +15,11 @@ typedef struct no{
     struct no* proximo;
 }Grafo;
 
+typedef struct string{
+    char nome_arquivo[20];
+    struct string* proximo;
+}String;
+
 
 Grafo* loadFile(char* filename);
 
