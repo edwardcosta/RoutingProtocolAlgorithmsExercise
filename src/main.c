@@ -49,7 +49,9 @@ int main(int argc, char **argv) {
         while(troca){
             link_state_aux = link_state;
             while(link_state_aux != NULL){
-                troca = escreveTabelaTopologia(link_state);
+                printf("%d\n",link_state_aux->num );
+                getchar();
+                troca = escreveTabelaTopologia(link_state_aux);
                 link_state_aux = link_state_aux->proximo;
             }
         }

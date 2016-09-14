@@ -126,6 +126,8 @@ Grafo* constroiTabela(int no, Lista_vizinho* lista_no){
     * Cada no possui uma tabela com a informação do grafo a ser preenchida
     */
     sprintf(constroi->grafo, "grafo_%d.txt", no);
+    printf("%s\n",constroi->grafo );
+    getchar();
 
     return constroi;
 }
@@ -162,8 +164,13 @@ int escreveTabelaTopologia(Grafo* no){
 
     grafo_no = fopen(src_aux->grafo,"r");
 
+    printf("%d\n",src_aux->num );
+    printf("%s\n",src_aux->grafo);
+    getchar();
+
     if(grafo_no == NULL){
         printf("ola entrei! %d ", src_aux->num);
+        getchar();
         grafo_no = fopen(src_aux->grafo,"w");
         fprintf(grafo_no, "%d;", src_aux->num);
         sprintf(vizinhos, "%d;" ,src_aux->num);
@@ -179,15 +186,21 @@ int escreveTabelaTopologia(Grafo* no){
         }
         fprintf(grafo_no, "\n");
         sprintf(vizinhos, "\n");
+        fclose(grafo_no);
+    }else{
+        
     }
-    fclose(grafo_no);
+
     for(;nome_arquivo != NULL; nome_arquivo = nome_arquivo->proximo){
+        printf("%s\n",nome_arquivo->nome_arquivo);
+        getchar();
         grafo_vizinho = fopen(nome_arquivo->nome_arquivo, "r");
         if(grafo_vizinho == NULL){
             grafo_vizinho = fopen(nome_arquivo->nome_arquivo,"w");
             grafo_no = fopen(src_aux->grafo,"r");
-            while(!EOF){
-                fgets(no_string_aux,20,grafo_no);
+            while(fgets(no_string_aux,20,grafo_no) != NULL){
+                printf("%s\n", no_string_aux);
+                getchar();
                 fputs(no_string_aux, grafo_vizinho);
             }
             fclose(grafo_no);
@@ -226,7 +239,7 @@ int escreveTabelaTopologia(Grafo* no){
             }
         }
     }
-    printf("ERROR: problema ao criar tabelas dos nos");
+    printf("ERROR: problema ao criar tabelas dos nos\n");
     return troca;
 }
 
