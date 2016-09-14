@@ -168,7 +168,8 @@ int escreveTabelaTopologia(Grafo* no){
     printf("%s\n",src_aux->grafo);
     getchar();
 
-    if(grafo_no == NULL){
+    /*Parte da tabela de tepologia de cada no*/
+    if(grafo_no == NULL){/*cria arquivo caso nao exista*/
         printf("ola entrei! %d ", src_aux->num);
         getchar();
         grafo_no = fopen(src_aux->grafo,"w");
@@ -187,15 +188,46 @@ int escreveTabelaTopologia(Grafo* no){
         fprintf(grafo_no, "\n");
         sprintf(vizinhos, "\n");
         fclose(grafo_no);
-    }else{
-        
+    }else{ /*se ja existir verifica se a linha do proprio no esta na tabela*/
+        int tem_na_tabela_topologia = 1; /*parte do pressuposto que ja tem a linha na tabela*/
+        int i;
+        char num_aux[5];
+
+        while(fgets(vizinho_string_aux,20,grafo_no) != NULL){
+            for(i = 0;vizinho_string_aux[i] !=';';i++){
+                num_aux[i] = vizinho_string_aux[i];
+            }
+            if(src_aux->num == atoi(num_aux)){
+                tem_na_tabela_topologia = 0;
+            }
+        }
+        fclose(grafo_no);
+        if(tem_na_tabela_topologia == 0){/*se nao tiver a linha adiciona*/
+            grafo_no = fopen(src_aux->grafo_no,"w+");
+            fprintf(grafo_no, "%d;", src_aux->num);
+            sprintf(vizinhos, "%d;" ,src_aux->num);
+            while(src_aux->vizinho != NULL){
+                fprintf(grafo_no, "%d[%d];", src_aux->vizinho->vizinho, src_aux->vizinho->custo);
+                nome_arquivo_aux = calloc(1, sizeof(String));
+                sprintf(nome_arquivo_aux->nome_arquivo, "grafo_%d.txt", src_aux->vizinho->vizinho);
+                nome_arquivo_aux->proximo = nome_arquivo;
+                nome_arquivo = nome_arquivo_aux;
+                sprintf(aux,"%d[%d];", src_aux->vizinho->vizinho, src_aux->vizinho->custo);
+                strcat(vizinhos, aux);
+                src_aux->vizinho = src_aux->vizinho->proximo;
+            }
+            fprintf(grafo_no, "\n");
+            sprintf(vizinhos, "\n");
+            fclose(grafo_no);
+        }
     }
 
-    for(;nome_arquivo != NULL; nome_arquivo = nome_arquivo->proximo){
+    /*parte de divulgar ao vizinhos a tabela de cada no*/
+    for(;nome_arquivo != NULL; nome_arquivo = nome_arquivo->proximo){ /*para cada vizinho*/
         printf("%s\n",nome_arquivo->nome_arquivo);
         getchar();
         grafo_vizinho = fopen(nome_arquivo->nome_arquivo, "r");
-        if(grafo_vizinho == NULL){
+        if(grafo_vizinho == NULL){/*se o arquivo de tabela de topologia do vizinho nao existe cria*/
             grafo_vizinho = fopen(nome_arquivo->nome_arquivo,"w");
             grafo_no = fopen(src_aux->grafo,"r");
             while(fgets(no_string_aux,20,grafo_no) != NULL){
@@ -205,7 +237,7 @@ int escreveTabelaTopologia(Grafo* no){
             }
             fclose(grafo_no);
             fclose(grafo_vizinho);
-        }else{
+        }else{ /*se ja existe, para cada vizinho verifica se a lnha ja foi adicionada*/
             grafo_vizinho = fopen(nome_arquivo->nome_arquivo, "w+");
             while(aux_no != NULL){
                 while(sair != 1){ // le no
@@ -239,7 +271,6 @@ int escreveTabelaTopologia(Grafo* no){
             }
         }
     }
-    printf("ERROR: problema ao criar tabelas dos nos\n");
     return troca;
 }
 
