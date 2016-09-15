@@ -203,7 +203,7 @@ int escreveTabelaTopologia(Grafo* no){
         }
         fclose(grafo_no);
         if(tem_na_tabela_topologia == 0){/*se nao tiver a linha adiciona*/
-            grafo_no = fopen(src_aux->grafo_no,"w+");
+            grafo_no = fopen(src_aux->grafo,"a");
             fprintf(grafo_no, "%d;", src_aux->num);
             sprintf(vizinhos, "%d;" ,src_aux->num);
             while(src_aux->vizinho != NULL){
@@ -238,7 +238,7 @@ int escreveTabelaTopologia(Grafo* no){
             fclose(grafo_no);
             fclose(grafo_vizinho);
         }else{ /*se ja existe, para cada vizinho verifica se a lnha ja foi adicionada*/
-            grafo_vizinho = fopen(nome_arquivo->nome_arquivo, "w+");
+            grafo_vizinho = fopen(nome_arquivo->nome_arquivo, "a");
             while(aux_no != NULL){
                 while(sair != 1){ // le no
                     if((c_aux = fgetc(grafo_vizinho)) == EOF){
