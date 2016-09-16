@@ -87,7 +87,7 @@ Grafo* loadFile(char* file_name){
                 lista_no_aux->custo = atoi(custo);
                 lista_no_aux->proximo = lista_no;
                 lista_no = lista_no_aux;
-                // printf("\tvizinho:%d custo:%d\n", lista_no_aux->vizinho, lista_no_aux->custo);
+                /* printf("\tvizinho:%d custo:%d\n", lista_no_aux->vizinho, lista_no_aux->custo); */
             }
             /**
             * Com a lista dos vizinhos do no pronta eh gerado um no no Grafo
@@ -102,7 +102,7 @@ Grafo* loadFile(char* file_name){
         printf("ERROR: nao foi possivel abrir o arquivo com a topologia especificada\n");
         printf("verifique o nome inserido e tente novamente.\n");
     }
-    // imprimeTabela(link_state);
+    /* imprimeTabela(link_state); */
     return link_state;
 }
 

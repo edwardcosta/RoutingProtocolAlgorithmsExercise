@@ -14,7 +14,7 @@ typedef struct no_aux{
 }Lista_vizinho;
 
 typedef struct no{
-    int num;    // numero do no
+    int num;    /* numero do no */
     char grafo[20];
     char tabela[20];
     Lista_vizinho* vizinho;

@@ -22,8 +22,8 @@ void dijkstraLista(Grafo* link_state){
     tabelaDv* tabela = malloc(sizeof(tabelaDv));
 
     /*Inicializacao*/
-    N[i] = link_state_aux->num; //no raiz u
-    vizinhos = link_state_aux->vizinho; // vizinhos de u
+    N[i] = link_state_aux->num; /* no raiz u */
+    vizinhos = link_state_aux->vizinho; /* vizinhos de u */
 
     while(vizinhos != NULL){
 
@@ -33,5 +33,5 @@ void dijkstraLista(Grafo* link_state){
     }
     /*Loop até N' = N*/
 
-    //imprimeTabela(link_state);
+    /* imprimeTabela(link_state); */
 }

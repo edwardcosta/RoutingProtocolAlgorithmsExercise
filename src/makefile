@@ -1,11 +1,11 @@
 IDIR =../include
 CC=gcc
-CFLAGS=-g -I$(IDIR)
+CFLAGS=-g -ansi -Wall -I$(IDIR)
 
 ODIR=../obj
 LDIR =../lib
 
-LIBS=-lm -pthread -g
+LIBS=-lm -pthread
 
 _DEPS = grafo.h file.h dijkstra.h
 DEPS = $(patsubst %,$(IDIR)/%,$(_DEPS))
