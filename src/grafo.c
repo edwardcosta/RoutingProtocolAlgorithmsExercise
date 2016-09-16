@@ -31,13 +31,8 @@ int escreveTabelaTopologia(Grafo* no){
 
     grafo_no = fopen(src_aux->grafo,"r");
 
-    printf("No %d\n",src_aux->num);
-    getchar();
-
     /*Parte da tabela de tepologia de cada no*/
     if(grafo_no == NULL){/*cria arquivo caso nao exista*/
-        printf("%d criar tabela %s",src_aux->num,src_aux->grafo);
-        getchar();
         grafo_no = fopen(src_aux->grafo,"w");
         fprintf(grafo_no, "%d;", src_aux->num);
         Lista_vizinho *lista_vizinho_aux = src_aux->vizinho;
@@ -56,15 +51,10 @@ int escreveTabelaTopologia(Grafo* no){
         char *vizinho_string_aux = NULL;
         char num_aux[5];
 
-        printf("%s ja existe\n",src_aux->grafo);
-        getchar();
-
         while(getdelim(&vizinho_string_aux,&len,'\n',grafo_no) != -1){
             for(i = 0;vizinho_string_aux[i] !=';';i++){
                 num_aux[i] = vizinho_string_aux[i];
             }
-            printf("vizinho %d na tabela\n", atoi(num_aux));
-            getchar();
             if(src_aux->num == atoi(num_aux)){
                 tem_na_tabela_topologia = true;
             }
@@ -72,7 +62,6 @@ int escreveTabelaTopologia(Grafo* no){
         free(vizinho_string_aux);
         fclose(grafo_no);
         if(tem_na_tabela_topologia == false){/*se nao tiver a linha adiciona*/
-            printf("escrever %d na tabela %s\n", src_aux->num,src_aux->grafo);
             grafo_no = fopen(src_aux->grafo,"a");
             fprintf(grafo_no, "\n");
             fprintf(grafo_no, "%d;", src_aux->num);
@@ -88,7 +77,6 @@ int escreveTabelaTopologia(Grafo* no){
         }else{
             Lista_vizinho *lista_vizinho_aux = src_aux->vizinho;
             for(;lista_vizinho_aux != NULL; lista_vizinho_aux = lista_vizinho_aux->proximo){
-                fprintf(grafo_no, "%d[%d];", lista_vizinho_aux->vizinho, lista_vizinho_aux->custo);
                 nome_arquivo_aux = calloc(1, sizeof(String));
                 sprintf(nome_arquivo_aux->nome_arquivo, "grafo_%d.txt", lista_vizinho_aux->vizinho);
                 nome_arquivo_aux->proximo = nome_arquivo;
@@ -99,19 +87,13 @@ int escreveTabelaTopologia(Grafo* no){
 
     /*parte de divulgar ao vizinhos a tabela de cada no*/
     while(nome_arquivo != NULL){ /*para cada vizinho*/
-        printf("%s\n",nome_arquivo->nome_arquivo);
-        getchar();
         grafo_vizinho = fopen(nome_arquivo->nome_arquivo, "r");
         if(grafo_vizinho == NULL){/*se o arquivo de tabela de topologia do vizinho nao existe, cria*/
             char *no_string_aux = NULL;
             size_t len = 0;
-            printf("%s criar tabela\n",nome_arquivo->nome_arquivo);
-            getchar();
             grafo_vizinho = fopen(nome_arquivo->nome_arquivo,"w");
             grafo_no = fopen(src_aux->grafo,"r");
             while(getdelim(&no_string_aux,&len,'\n',grafo_no) != -1){
-                printf("%s\n", no_string_aux);
-                getchar();
                 fprintf(grafo_vizinho, "%s",no_string_aux);
             }
             free(no_string_aux);
@@ -125,9 +107,6 @@ int escreveTabelaTopologia(Grafo* no){
             char *no_string_aux = NULL;
             char no_num_aux[5];
             char vizinho_num_aux[5];
-
-            printf("%s ja tem tabela\n",nome_arquivo->nome_arquivo);
-            getchar();
 
             grafo_no = fopen(src_aux->grafo, "r");
 
@@ -143,8 +122,6 @@ int escreveTabelaTopologia(Grafo* no){
                     for(j = 0;vizinho_string_aux[j] !=';';j++){
                         vizinho_num_aux[j] = vizinho_string_aux[j];
                     }
-                    printf("%d\n%d\n",atoi(no_num_aux),atoi(vizinho_num_aux));
-                    getchar();
                     if(atoi(no_num_aux) == atoi(vizinho_num_aux)){
                         tem_na_tabela_topologia = true;
                     }
@@ -152,7 +129,7 @@ int escreveTabelaTopologia(Grafo* no){
                 free(vizinho_string_aux);
                 fclose(grafo_vizinho);
                 if(tem_na_tabela_topologia == false){
-                    printf("Escreve na tabela\n");
+                    cutStringOnChar(no_string_aux,'\n');
                     grafo_vizinho = fopen(nome_arquivo->nome_arquivo, "a");
                     fprintf(grafo_vizinho, "\n%s",no_string_aux);
                     fclose(grafo_vizinho);
@@ -167,6 +144,17 @@ int escreveTabelaTopologia(Grafo* no){
         free(nome_arquivo_aux);
     }
     return troca;
+}
+
+/*Funcao auxiliar para remover os '\n' das strings e nao acontecer
+* de adicionar indevidamente '\n' nos arquivos*/
+void cutStringOnChar(char s[], char c){
+    int i;
+    for(i = 0; i < strlen(s); i++){
+        if(s[i] == c){
+            s[i] = '\0';
+        }
+    }
 }
 
 /**
