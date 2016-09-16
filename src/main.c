@@ -22,7 +22,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include "grafo.h"
 #include "file.h"
+#include "dijkstra.h"
 
 int main(int argc, char **argv) {
 
@@ -38,26 +40,32 @@ int main(int argc, char **argv) {
         char nome_topologia[20];
         strcpy(nome_topologia, argv[1]);
         /**
-         * Recebe o nome da topologia por linha de comando e a partir do arquivo
-         * eh gerado um grafo com os dados lidos, nos, vizinhos e custos
-         */
+        * Recebe o nome da topologia por linha de comando e a partir do arquivo
+        * eh gerado um grafo com os dados lidos, nos, vizinhos e custos
+        */
         link_state = loadFile(nome_topologia);
         /*imprimeTabela(link_state);*/
         /**
-         * Faz troca de dados enquanto ha troca de dados dos nos entre os nos
-         */
-        while(troca == true){
-            troca = false;
-            link_state_aux = link_state;
-            while(link_state_aux != NULL){
-                int t = escreveTabelaTopologia(link_state_aux);
-                link_state_aux = link_state_aux->proximo;
-                if(t == true){
-                    troca = true;
-                }
-            }
-        }
-        imprimeTabelaGrafo();
+        * Faz troca de dados enquanto ha troca de dados dos nos entre os nos
+        */
+        // while(troca == true){
+        //     troca = false;
+        //     link_state_aux = link_state;
+        //     while(link_state_aux != NULL){
+        //         int t = escreveTabelaTopologia(link_state_aux);
+        //         link_state_aux = link_state_aux->proximo;
+        //         if(t == true){
+        //             troca = true;
+        //         }
+        //     }
+        // }
+        // imprimeTabelaGrafo();
+        /**
+        * Dijkstra
+        */
+        dijkstraLista(link_state);
+
+
     }
     return 0;
 }

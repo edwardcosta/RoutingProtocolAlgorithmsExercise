@@ -1,36 +1,7 @@
 #ifndef FILE_H
 #define FILE_H
 
-typedef struct no_aux{
-    int vizinho;
-    int custo;
-    struct no_aux* proximo;
-}Lista_vizinho;
-
-typedef struct no{
-    int num;    /* numero do no */
-    char grafo[20];
-    char tabela[20];
-    Lista_vizinho* vizinho;
-    struct no* proximo;
-}Grafo;
-
-typedef struct string{
-    char nome_arquivo[20];
-    struct string* proximo;
-}String;
-
-#define true 1
-#define false 0
-
-
 Grafo* loadFile(char* filename);
-
 Grafo* constroiTabela(int no, Lista_vizinho* lista_no_aux);
-
-int escreveTabelaTopologia(Grafo* no);
-void imprimeTabela(Grafo* link_state);
-
-void imprimeTabelaGrafo();
 
 #endif
