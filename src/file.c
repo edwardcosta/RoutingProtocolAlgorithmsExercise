@@ -31,7 +31,7 @@ Grafo* loadFile(char* file_name){
         /**
         * Percorre arquivo até o final
         */
-        while(sair != 1){ // le no
+        while(sair != 1){ /* le no */
             if((c_aux = fgetc(arq)) == EOF){
                 sair = 1;
                 break;

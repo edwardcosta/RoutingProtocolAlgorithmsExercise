@@ -42,7 +42,7 @@ int main(int argc, char **argv) {
          * eh gerado um grafo com os dados lidos, nos, vizinhos e custos
          */
         link_state = loadFile(nome_topologia);
-        //imprimeTabela(link_state);
+        /*imprimeTabela(link_state);*/
         /**
          * Faz troca de dados enquanto ha troca de dados dos nos entre os nos
          */
