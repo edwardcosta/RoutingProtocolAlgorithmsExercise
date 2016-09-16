@@ -175,7 +175,6 @@ int escreveTabelaTopologia(Grafo* no){
             nome_arquivo_aux->proximo = nome_arquivo;
             nome_arquivo = nome_arquivo_aux;
         }
-        fprintf(grafo_no, "\n");
         fclose(grafo_no);
     }else{ /*se ja existir verifica se a linha do proprio no esta na tabela*/
         int tem_na_tabela_topologia = false; /*parte do pressuposto que nao tem a linha na tabela*/
@@ -187,7 +186,7 @@ int escreveTabelaTopologia(Grafo* no){
         printf("%s ja existe\n",src_aux->grafo);
         getchar();
 
-        while(getline(&vizinho_string_aux,&len,grafo_no) != -1){
+        while(getdelim(&vizinho_string_aux,&len,'\n',grafo_no) != -1){
             for(i = 0;vizinho_string_aux[i] !=';';i++){
                 num_aux[i] = vizinho_string_aux[i];
             }
@@ -197,10 +196,12 @@ int escreveTabelaTopologia(Grafo* no){
                 tem_na_tabela_topologia = true;
             }
         }
+        free(vizinho_string_aux);
         fclose(grafo_no);
         if(tem_na_tabela_topologia == false){/*se nao tiver a linha adiciona*/
             printf("escrever %d na tabela %s\n", src_aux->num,src_aux->grafo);
             grafo_no = fopen(src_aux->grafo,"a");
+            fprintf(grafo_no, "\n");
             fprintf(grafo_no, "%d;", src_aux->num);
             Lista_vizinho *lista_vizinho_aux = src_aux->vizinho;
             for(;lista_vizinho_aux != NULL; lista_vizinho_aux = lista_vizinho_aux->proximo){
@@ -210,13 +211,21 @@ int escreveTabelaTopologia(Grafo* no){
                 nome_arquivo_aux->proximo = nome_arquivo;
                 nome_arquivo = nome_arquivo_aux;
             }
-            fprintf(grafo_no, "\n");
             fclose(grafo_no);
+        }else{
+            Lista_vizinho *lista_vizinho_aux = src_aux->vizinho;
+            for(;lista_vizinho_aux != NULL; lista_vizinho_aux = lista_vizinho_aux->proximo){
+                fprintf(grafo_no, "%d[%d];", lista_vizinho_aux->vizinho, lista_vizinho_aux->custo);
+                nome_arquivo_aux = calloc(1, sizeof(String));
+                sprintf(nome_arquivo_aux->nome_arquivo, "grafo_%d.txt", lista_vizinho_aux->vizinho);
+                nome_arquivo_aux->proximo = nome_arquivo;
+                nome_arquivo = nome_arquivo_aux;
+            }
         }
     }
 
     /*parte de divulgar ao vizinhos a tabela de cada no*/
-    for(;nome_arquivo != NULL; nome_arquivo = nome_arquivo->proximo){ /*para cada vizinho*/
+    while(nome_arquivo != NULL){ /*para cada vizinho*/
         printf("%s\n",nome_arquivo->nome_arquivo);
         getchar();
         grafo_vizinho = fopen(nome_arquivo->nome_arquivo, "r");
@@ -227,11 +236,12 @@ int escreveTabelaTopologia(Grafo* no){
             getchar();
             grafo_vizinho = fopen(nome_arquivo->nome_arquivo,"w");
             grafo_no = fopen(src_aux->grafo,"r");
-            while(getline(&no_string_aux,&len,grafo_no) != -1){
+            while(getdelim(&no_string_aux,&len,'\n',grafo_no) != -1){
                 printf("%s\n", no_string_aux);
                 getchar();
-                fputs(no_string_aux, grafo_vizinho);
+                fprintf(grafo_vizinho, "%s",no_string_aux);
             }
+            free(no_string_aux);
             fclose(grafo_no);
             fclose(grafo_vizinho);
             troca = true;
@@ -239,9 +249,7 @@ int escreveTabelaTopologia(Grafo* no){
             int tem_na_tabela_topologia = false; /*parte do pressuposto que nao tem a linha na tabela*/
             int i,j;
             size_t len_no = 0;
-            size_t len_vizinho = 0;
             char *no_string_aux = NULL;
-            char *vizinho_string_aux = NULL;
             char no_num_aux[5];
             char vizinho_num_aux[5];
 
@@ -250,13 +258,15 @@ int escreveTabelaTopologia(Grafo* no){
 
             grafo_no = fopen(src_aux->grafo, "r");
 
-            while (getline(&no_string_aux,&len_no, grafo_no) != -1) {
+            while (getdelim(&no_string_aux,&len_no,'\n',grafo_no) != -1) {
+                size_t len_vizinho = 0;
+                char *vizinho_string_aux = NULL;
                 tem_na_tabela_topologia = false;
                 for(i = 0;no_string_aux[i] !=';';i++){
                     no_num_aux[i] = no_string_aux[i];
                 }
                 grafo_vizinho = fopen(nome_arquivo->nome_arquivo, "r");
-                while (getline(&vizinho_string_aux,&len_vizinho,grafo_vizinho) != -1) {
+                while (getdelim(&vizinho_string_aux,&len_vizinho,'\n',grafo_vizinho) != -1) {
                     for(j = 0;vizinho_string_aux[j] !=';';j++){
                         vizinho_num_aux[j] = vizinho_string_aux[j];
                     }
@@ -266,17 +276,22 @@ int escreveTabelaTopologia(Grafo* no){
                         tem_na_tabela_topologia = true;
                     }
                 }
+                free(vizinho_string_aux);
                 fclose(grafo_vizinho);
                 if(tem_na_tabela_topologia == false){
                     printf("Escreve na tabela\n");
                     grafo_vizinho = fopen(nome_arquivo->nome_arquivo, "a");
-                    fprintf(grafo_vizinho, "%s\n",no_string_aux);
+                    fprintf(grafo_vizinho, "\n%s",no_string_aux);
                     fclose(grafo_vizinho);
                     troca = true;
                 }
             }
             fclose(grafo_no);
+            free(no_string_aux);
         }
+        nome_arquivo_aux = nome_arquivo;
+        nome_arquivo = nome_arquivo->proximo;
+        free(nome_arquivo_aux);
     }
     return troca;
 }
