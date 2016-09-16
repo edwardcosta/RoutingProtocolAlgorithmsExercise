@@ -20,6 +20,9 @@ typedef struct string{
     struct string* proximo;
 }String;
 
+#define true 1
+#define false 0
+
 
 Grafo* loadFile(char* filename);
 

@@ -29,7 +29,7 @@ int main(int argc, char **argv) {
     Grafo* link_state;
     Grafo* link_state_aux;
 
-    int troca = 1;
+    int troca = true;
 
     if(argc != 2){
         printf("\nERROR: numero de argumentos de entrada inválido\n");
@@ -46,13 +46,15 @@ int main(int argc, char **argv) {
         /**
          * Faz troca de dados enquanto ha troca de dados dos nos entre os nos
          */
-        while(troca){
+        while(troca == true){
+            troca = false;
             link_state_aux = link_state;
             while(link_state_aux != NULL){
-                printf("%d\n",link_state_aux->num );
-                getchar();
-                troca = escreveTabelaTopologia(link_state_aux);
+                int t = escreveTabelaTopologia(link_state_aux);
                 link_state_aux = link_state_aux->proximo;
+                if(t == true){
+                    troca = true;
+                }
             }
         }
         imprimeTabelaGrafo();
