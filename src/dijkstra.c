@@ -19,7 +19,7 @@ void dijkstraLista(Grafo* link_state){
 
     Grafo* link_state_aux = link_state;
     Lista_vizinho* vizinhos = NULL;
-    tabelaDv* tabela = malloc(sizeof(tabelaDv);
+    tabelaDv* tabela = malloc(sizeof(tabelaDv));
 
     /*Inicializacao*/
     N[i] = link_state_aux->num; //no raiz u
