@@ -31,15 +31,16 @@ int main(int argc, char **argv) {
     Grafo* link_state;
     Grafo* link_state_aux;
 
+    int i, qtd_nos = 0, qtd_trocas = 0;
     int troca = true;
-    int numTrocas = 0;
+
+    char nome_topologia[20];
 
     if(argc != 2){
 
         printf("\nERROR: numero de argumentos de entrada inválido\n");
         printf("formato entrada: ./main nome_topologia\n");
     }else{
-        char nome_topologia[20];
         strcpy(nome_topologia, argv[1]);
         /**
          * Recebe o nome da topologia por linha de comando e a partir do arquivo
@@ -53,17 +54,28 @@ int main(int argc, char **argv) {
         while(troca == true){
             troca = false;
             link_state_aux = link_state;
+            qtd_nos = 0;
             while(link_state_aux != NULL){
                 int t = escreveTabelaTopologia(link_state_aux);
+                qtd_nos++;
                 link_state_aux = link_state_aux->proximo;
-                numTrocas += t;
-                if(t != 0){
+
+                if(t == true){
+                    qtd_trocas++;
                     troca = true;
                 }
             }
         }
-        imprimeTabelaGrafo();
+        printf("trocas: %d, numero de nos: %d\n", qtd_trocas, qtd_nos);
     }
-    dijkstraLista(link_state);
+
+    for(i = 1; i <= qtd_nos; i++){
+        sprintf(nome_topologia, "grafo_%d", i);
+        link_state_aux = loadFile(nome_topologia);
+        /*dijkstraLista(link_state_aux, qtd_nos);*/
+    }
+
+    imprimeTabela(link_state);
+    dijkstraLista(link_state_aux, qtd_nos);
     return 0;
 }

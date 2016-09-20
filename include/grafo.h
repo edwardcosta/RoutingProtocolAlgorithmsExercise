@@ -28,11 +28,7 @@ typedef struct string{
 
 int escreveTabelaTopologia(Grafo* no);
 void imprimeTabela(Grafo* link_state);
-
 void imprimeTabelaGrafo();
-
 void cutStringOnChar(char s[], char c);
-
-void dijkstraLista();
 
 #endif
