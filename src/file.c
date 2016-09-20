@@ -23,8 +23,8 @@ Grafo* loadFile(char* file_name){
     int c_aux;
     char c[2];
     char no[10];
-    char vizinho[10];
-    char custo[10];
+    char vizinho[50];
+    char custo[50];
 
     arq = fopen(file_name,"r");
 
@@ -53,7 +53,11 @@ Grafo* loadFile(char* file_name){
             /**
             * le vizinho e custo enquanto nao passar para o outro no
             */
-            while((c_aux = fgetc(arq))!= '\n'){
+            while((c_aux = fgetc(arq)) != '\n'){
+                if((c_aux) == EOF){
+                    sair = 1;
+                    break;
+                }
                 /**
                 * le vizinho
                 */

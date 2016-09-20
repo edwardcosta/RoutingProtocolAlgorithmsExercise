@@ -14,13 +14,17 @@ Compilação:
 Execução:
 	Rodar o executável gerado na compilação com o nome da	 topologia desejada.
 
-	./main topologia_x
+	./main topologia_x >> validacao
 
 Saídas do programa:
 Esperado:
-	- Lista de destino e custos;
-	- Convergência;
-	- Validação.
+	- Lista de destino e custos: Arquivo gerado contendo o menor custo a partir
+	  de um nó raiz para os demais nós da topologia;
+	- Convergência: Trocas de dados necessárias entre os nós para que todos
+	  tenham o mesmo arquivo com a topologia lida;
+	- Validação: Arquivo gerado com menssagens do programa, impressão de
+	  topologia, impressão de arquivo com dados trocados, etc.
+
 Realidade:
 	- O programa não esta funcionando corretamente
 	- Leitura do arquivo

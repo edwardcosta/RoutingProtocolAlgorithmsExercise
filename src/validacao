@@ -1,0 +1,63 @@
+	GRAFO DA TOPOLOGIA LIDA: topo_6.txt
+no: 6
+	vizinho: 5	custo: 5
+	vizinho: 4	custo: 2
+no: 5
+	vizinho: 6	custo: 5
+	vizinho: 4	custo: 1
+	vizinho: 2	custo: 3
+	vizinho: 3	custo: 3
+	vizinho: 1	custo: 5
+no: 4
+	vizinho: 6	custo: 2
+	vizinho: 5	custo: 1
+	vizinho: 2	custo: 1
+no: 3
+	vizinho: 5	custo: 3
+	vizinho: 2	custo: 2
+	vizinho: 1	custo: 2
+no: 2
+	vizinho: 4	custo: 1
+	vizinho: 5	custo: 3
+	vizinho: 3	custo: 2
+	vizinho: 1	custo: 1
+no: 1
+	vizinho: 5	custo: 5
+	vizinho: 3	custo: 2
+	vizinho: 2	custo: 1
+
+
+	TROCAS DE TABELAS E NUMERO DE NOS NA TOPOLOGIA
+trocas: 7, numero de nos: 6
+
+
+	GRAFO TOPOLOGIA NO 1, APOS TROCAS DE DADOS
+no: 1
+	vizinho: 2	custo: 1
+	vizinho: 3	custo: 2
+	vizinho: 5	custo: 5
+no: 2
+	vizinho: 1	custo: 1
+	vizinho: 3	custo: 2
+	vizinho: 5	custo: 3
+	vizinho: 4	custo: 1
+no: 4
+	vizinho: 2	custo: 1
+	vizinho: 5	custo: 1
+	vizinho: 6	custo: 2
+no: 3
+	vizinho: 1	custo: 2
+	vizinho: 2	custo: 2
+	vizinho: 5	custo: 3
+no: 5
+	vizinho: 1	custo: 5
+	vizinho: 3	custo: 3
+	vizinho: 2	custo: 3
+	vizinho: 4	custo: 1
+	vizinho: 6	custo: 5
+no: 6
+	vizinho: 4	custo: 2
+	vizinho: 5	custo: 5
+
+
+	ALGORITMO DE DIJKSTRA
