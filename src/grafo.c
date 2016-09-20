@@ -31,7 +31,7 @@ int escreveTabelaTopologia(Grafo* no){
 
     grafo_no = fopen(src_aux->grafo,"r");
 
-    /*Parte da tabela de tepologia de cada no*/
+    /*Parte da tabela de topologia de cada no*/
     if(grafo_no == NULL){/*cria arquivo caso nao exista*/
         grafo_no = fopen(src_aux->grafo,"w");
         fprintf(grafo_no, "%d;", src_aux->num);
@@ -155,6 +155,7 @@ void cutStringOnChar(char s[], char c){
             s[i] = '\0';
         }
     }
+    return;
 }
 
 /**
@@ -175,6 +176,7 @@ void imprimeTabela(Grafo* link_state){
             printf("\tcusto: %d\n", lista->custo);
         }
     }
+    return;
 }
 
 void imprimeTabelaGrafo(){

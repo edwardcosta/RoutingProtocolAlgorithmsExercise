@@ -1,6 +1,6 @@
 #ifndef DIJKSTRA_H
 #define DIJKSTRA_H
 
-Grafo* loadFile(char* filename);
-
+    void dijkstraLista();
+    int ehVizinho(int vizinho, Grafo* link_state);
 #endif
