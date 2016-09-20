@@ -28,7 +28,7 @@ no: 1
 
 
 	TROCAS DE TABELAS E NUMERO DE NOS NA TOPOLOGIA
-trocas: 7, numero de nos: 6
+trocas: 0, numero de nos: 6
 
 
 	GRAFO TOPOLOGIA NO 1, APOS TROCAS DE DADOS

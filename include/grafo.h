@@ -31,5 +31,4 @@ void imprimeTabela(Grafo* link_state);
 void imprimeTabelaGrafo();
 void cutStringOnChar(char s[], char c);
 
-size_t getdelim(char **lineptr, size_t *n, int delim, FILE *stream);
 #endif

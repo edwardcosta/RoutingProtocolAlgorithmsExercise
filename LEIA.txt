@@ -12,9 +12,9 @@ Compilação:
 	Ir para diretório src e executar comando make.
 
 Execução:
-	Rodar o executável gerado na compilação com o nome da	 topologia desejada.
+	Ainda no diretorio src rodar o executável gerado na compilação com o nome da topologia desejada.
 
-	./main topologia_x >> validacao
+	./main topologia_x > validacao
 
 Saídas do programa:
 Esperado:

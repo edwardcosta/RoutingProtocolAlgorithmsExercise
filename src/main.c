@@ -47,7 +47,12 @@ int main(int argc, char **argv) {
          * eh gerado um grafo com os dados lidos, nos, vizinhos e custos
          */
         link_state = loadFile(nome_topologia);
-        /*imprimeTabela(link_state);*/
+        /**
+         * Impressao do grafo da topologia lida
+         */
+        printf("\tGRAFO DA TOPOLOGIA LIDA: %s\n", nome_topologia);
+        imprimeTabela(link_state);
+        printf("\n\n");
         /**
          * Faz troca de dados enquanto ha troca de dados dos nos entre os nos
          */
@@ -59,23 +64,36 @@ int main(int argc, char **argv) {
                 int t = escreveTabelaTopologia(link_state_aux);
                 qtd_nos++;
                 link_state_aux = link_state_aux->proximo;
-
                 if(t == true){
                     qtd_trocas++;
                     troca = true;
                 }
             }
         }
+        printf("\tTROCAS DE TABELAS E NUMERO DE NOS NA TOPOLOGIA\n");
         printf("trocas: %d, numero de nos: %d\n", qtd_trocas, qtd_nos);
+        printf("\n\n");
     }
 
+    /*
     for(i = 1; i <= qtd_nos; i++){
         sprintf(nome_topologia, "grafo_%d", i);
-        link_state_aux = loadFile(nome_topologia);
-        /*dijkstraLista(link_state_aux, qtd_nos);*/
+        printf("%s\n", nome_topologia);
+        dijkstraLista(link_state_aux, qtd_nos, i);
     }
-
-    imprimeTabela(link_state);
-    dijkstraLista(link_state_aux, qtd_nos);
+    */
+    /*
+    printf("\n\n%d", link_state_aux->num);
+    */
+    i = 1;
+    printf("\tGRAFO TOPOLOGIA NO 1, APOS TROCAS DE DADOS\n");
+    strcpy(nome_topologia, "grafo_1");
+    link_state_aux = loadFile(nome_topologia);
+    imprimeTabela(link_state_aux);
+    printf("\n\n");
+    printf("\tALGORITMO DE DIJKSTRA\n");
+    /*
+    dijkstraLista(link_state_aux, qtd_nos, i);
+    */
     return 0;
 }

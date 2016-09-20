@@ -15,7 +15,6 @@
 */
 int escreveTabelaTopologia(Grafo* no){
     Grafo* src_aux = no;
-    Lista_vizinho* aux_no = no->vizinho;
 
     FILE* grafo_no;
     FILE* grafo_vizinho;
@@ -23,11 +22,14 @@ int escreveTabelaTopologia(Grafo* no){
     String* nome_arquivo = NULL;
     String* nome_arquivo_aux = NULL;
 
+/*
+    Lista_vizinho* aux_no = no->vizinho;
     int sair = 0;
     int encontrou = 0;
     char c_aux;
     char c[2];
     char no_vizinho[10];
+*/
     int troca = 0;
 
     grafo_no = fopen(src_aux->grafo,"r");
