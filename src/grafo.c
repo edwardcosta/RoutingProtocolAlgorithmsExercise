@@ -27,7 +27,7 @@ int escreveTabelaTopologia(Grafo* no){
     char c_aux;
     char c[2];
     char no_vizinho[10];
-    int troca = false;
+    int troca = 0;
 
     grafo_no = fopen(src_aux->grafo,"r");
 
@@ -99,7 +99,7 @@ int escreveTabelaTopologia(Grafo* no){
             free(no_string_aux);
             fclose(grafo_no);
             fclose(grafo_vizinho);
-            troca = true;
+            troca++;
         }else{ /*se ja existe, para cada vizinho verifica se a linha ja foi adicionada*/
             int tem_na_tabela_topologia = false; /*parte do pressuposto que nao tem a linha na tabela*/
             int i,j;
@@ -133,7 +133,7 @@ int escreveTabelaTopologia(Grafo* no){
                     grafo_vizinho = fopen(nome_arquivo->nome_arquivo, "a");
                     fprintf(grafo_vizinho, "\n%s",no_string_aux);
                     fclose(grafo_vizinho);
-                    troca = true;
+                    troca++;
                 }
             }
             fclose(grafo_no);

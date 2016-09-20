@@ -32,6 +32,8 @@ int main(int argc, char **argv) {
     Grafo* link_state_aux;
 
     int troca = true;
+    int numTrocas = 0;
+
     if(argc != 2){
 
         printf("\nERROR: numero de argumentos de entrada inválido\n");
@@ -54,7 +56,8 @@ int main(int argc, char **argv) {
             while(link_state_aux != NULL){
                 int t = escreveTabelaTopologia(link_state_aux);
                 link_state_aux = link_state_aux->proximo;
-                if(t == true){
+                numTrocas += t;
+                if(t != 0){
                     troca = true;
                 }
             }
