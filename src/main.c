@@ -64,8 +64,8 @@ int main(int argc, char **argv) {
                 int t = escreveTabelaTopologia(link_state_aux);
                 qtd_nos++;
                 link_state_aux = link_state_aux->proximo;
-                if(t == true){
-                    qtd_trocas++;
+                if(t != 0){
+                    qtd_trocas += t;
                     troca = true;
                 }
             }
