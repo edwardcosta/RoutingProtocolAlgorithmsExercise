@@ -3,5 +3,6 @@
 
 Grafo* loadFile(char* filename);
 Grafo* constroiTabela(int no, Lista_vizinho* lista_no_aux);
+void gravaDistancia(char *arqname, char *linha);
 
 #endif

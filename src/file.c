@@ -134,3 +134,12 @@ Grafo* constroiTabela(int no, Lista_vizinho* lista_no){
 
     return constroi;
 }
+
+void gravaDistancia(char *arqname, char *linha){
+    FILE *arq;
+    arq = fopen(arqname,"a");
+    if(arq != NULL){
+        fprintf(arq, "%s",linha);
+    }
+    fclose(arq);
+}

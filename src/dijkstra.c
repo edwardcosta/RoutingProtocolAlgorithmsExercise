@@ -7,6 +7,7 @@
 #include <limits.h>
 #include "grafo.h"
 #include "dijkstra.h"
+#include "file.h"
 
 /**
  * [dijkstraLista calculo das menores distancias para todos os nos da
@@ -89,8 +90,13 @@ void dijkstraLista(Grafo* link_state, int qtd_nos, int raiz){
         }
     }
     /*IMPRESSAO NA TELA DAS DISTANCIAS EM RELAÇÃO AO NO RAIZ*/
+    char linha[20];
+    char arqname[20];
+    sprintf(arqname, "distance_%d.txt",raiz);
     while(dist_aux != NULL){
         printf("no:%d dist: %d\n", dist_aux->no, dist_aux->distancia);
+        sprintf(linha,"no:%d dist: %d\n",dist_aux->no, dist_aux->distancia);
+        gravaDistancia(arqname,linha);
         dist_aux = dist_aux->proximo;
     }
     free(dist);

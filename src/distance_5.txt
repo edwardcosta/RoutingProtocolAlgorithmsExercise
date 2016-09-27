@@ -1,0 +1,6 @@
+no:6 dist: 3
+no:5 dist: 0
+no:4 dist: 1
+no:3 dist: 3
+no:2 dist: 2
+no:1 dist: 3
