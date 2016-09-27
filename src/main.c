@@ -30,8 +30,9 @@ int main(int argc, char **argv) {
 
     Grafo* link_state;
     Grafo* link_state_aux;
+    Grafo* link_state_djk;
 
-    int i, qtd_nos = 0, qtd_trocas = 0;
+    int qtd_nos = 0, qtd_trocas = 0;
     int troca = true;
 
     char nome_topologia[20];
@@ -75,25 +76,16 @@ int main(int argc, char **argv) {
         printf("\n\n");
     }
 
-    /*
-    for(i = 1; i <= qtd_nos; i++){
-        sprintf(nome_topologia, "grafo_%d", i);
-        printf("%s\n", nome_topologia);
-        dijkstraLista(link_state_aux, qtd_nos, i);
-    }
-    */
-    /*
-    printf("\n\n%d", link_state_aux->num);
-    */
-    i = 1;
-    printf("\tGRAFO TOPOLOGIA NO 1, APOS TROCAS DE DADOS\n");
-    strcpy(nome_topologia, "grafo_1");
-    link_state_aux = loadFile(nome_topologia);
-    imprimeTabela(link_state_aux);
-    printf("\n\n");
     printf("\tALGORITMO DE DIJKSTRA\n");
-    /*
-    dijkstraLista(link_state_aux, qtd_nos, i);
-    */
+
+    link_state_djk = link_state;
+
+    while(link_state_djk != NULL){
+        sprintf(nome_topologia, "grafo_%d", link_state_djk->num);
+        link_state_aux = loadFile(nome_topologia);
+        dijkstraLista(link_state_aux, qtd_nos, link_state_djk->num);
+        link_state_djk = link_state_djk->proximo;
+    }
+
     return 0;
 }

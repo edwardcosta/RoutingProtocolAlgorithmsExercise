@@ -1,25 +1,32 @@
 #ifndef DIJKSTRA_H
 #define DIJKSTRA_H
 
-    typedef struct custo{
-        int distancia;
-        int no_anterior;
-        struct custo* proximo;
-    }Dv;
+typedef struct custo{
+    int distancia;
+    int no;
+    struct custo* proximo;
+}listaDist;
 
-    typedef struct tabela{
-        Dv* custo;
-        struct tabela* proximo;
-    }tabelaDv;
+typedef struct N{
+    int no;
+    int marcador;
+    struct N* proximo;
+}minSet;
 
-    typedef struct N{
-        int no;
-        struct subN* proximo;
-    }subN;
+void dijkstraLista(Grafo* link_state, int qtd_nos, int raiz);
 
-    void dijkstraLista(Grafo* link_state, int qtd_nos, int raiz);
-    int ehVizinho(int vizinho, Grafo* link_state);
-    void imprimeTabelaCusto(Dv* custo);
-    int completo(subN* N);
-    
+int menorDistancia(listaDist* dist, minSet* N);
+
+int procuraProcessado(minSet* N, int j);
+int procuraNo(listaDist* dist, int i);
+int procuraGrafoDist(Grafo* grafo, listaDist* dist, int u, int j);
+int procuraDist(listaDist* dist, int j, int tipo);
+
+void setDist(listaDist* dist, int j, int dist_u, int no_grafo_u);
+void setProcessado(int u, minSet* N);
+
+
+
+
+
 #endif
